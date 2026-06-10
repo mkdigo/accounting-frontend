@@ -1,0 +1,83 @@
+.container {
+  position: fixed;
+
+  gap: 1rem;
+  right: 0;
+  bottom: 1rem;
+  padding: 1rem 1rem 0;
+  width: 100%;
+  max-width: 500px;
+  z-index: 3;
+
+  .notification {
+    --notification-color: #000;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    padding: 1rem 2rem 1rem 1rem;
+    gap: 0.5rem;
+    width: 100%;
+
+    background: #fff;
+    border-radius: var(--rounded);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    border: solid 1px var(--notification-color);
+    animation: notificationAnimate 0.3s;
+
+    &:not(:first-child) {
+      margin-top: 1rem;
+    }
+
+    svg {
+      display: block;
+      font-size: 32px;
+      width: 32px;
+      min-width: 32px;
+      height: 32px;
+      color: var(--notification-color);
+    }
+
+    span {
+      color: var(--notification-color);
+      line-height: 1.5rem;
+    }
+
+    div {
+      position: absolute;
+      align-self: flex-start;
+      top: 0.5rem;
+      right: 0.5rem;
+      cursor: pointer;
+
+      svg {
+        font-size: 24px;
+        width: 24px;
+        min-width: 24px;
+        height: 24px;
+      }
+    }
+
+    &.warning {
+      --notification-color: #be9c03;
+    }
+
+    &.error {
+      --notification-color: var(--color-danger);
+    }
+
+    &.success {
+      --notification-color: var(--color-dark-green);
+    }
+  }
+}
+
+@keyframes notificationAnimate {
+  from {
+    bottom: -5rem;
+  }
+  to {
+    bottom: 0;
+  }
+}

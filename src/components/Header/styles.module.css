@@ -1,0 +1,9 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: var(--gradient-to-right);
+  color: var(--color-offwhite);
+  padding: 2rem;
+}

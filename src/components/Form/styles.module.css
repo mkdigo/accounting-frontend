@@ -1,0 +1,19 @@
+.form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 900px;
+  gap: 1rem;
+
+  border-radius: var(--border-radius);
+
+  div {
+    &:last-child {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+  }
+}

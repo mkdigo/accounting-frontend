@@ -1,0 +1,42 @@
+/* .wrapper {
+  input:focus + ul.list {
+    display: flex;
+  }
+
+  ul.list:hover {
+    display: flex;
+  }
+} */
+
+ul.list {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-height: 300px;
+  top: calc(100% + 6px);
+
+  background: #fff;
+  border: var(--border);
+  border-radius: var(--rounded);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  z-index: 2;
+
+  li {
+    padding: 0.5rem 0.5rem;
+
+    &:not(:first-child) {
+      border-top: var(--border);
+    }
+
+    &:focus {
+      border: solid 1px var(--color-green);
+    }
+
+    &:active {
+      background: rgba(65, 184, 131, 0.5);
+    }
+  }
+}

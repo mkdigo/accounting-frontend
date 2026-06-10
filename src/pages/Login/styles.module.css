@@ -1,0 +1,139 @@
+.main {
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+
+  display: flex;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  section.left {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background: linear-gradient(
+      to bottom,
+      var(--color-tertiary),
+      var(--color-secondary)
+    );
+    color: var(--color-offwhite);
+    padding: 2rem;
+
+    header {
+      font-size: 1.5rem;
+      font-weight: bold;
+
+      img {
+        height: 40px;
+        margin-right: 1rem;
+      }
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    ul {
+      flex-direction: column;
+      font-size: 1.1rem;
+
+      li + li {
+        margin-top: 0.5rem;
+      }
+    }
+
+    p {
+      font-size: 1.1rem;
+
+      a {
+        color: var(--color-green);
+
+        &:hover,
+        &:focus {
+          filter: brightness(1.2);
+        }
+      }
+    }
+  }
+
+  section.right {
+    align-items: center;
+    width: 35%;
+    min-width: 360px;
+    padding: 3rem 1rem;
+
+    div {
+      border: solid 1px var(--color-gray);
+      padding: 1rem;
+      border-radius: 5px;
+      text-align: center;
+
+      a {
+        text-decoration: underline;
+      }
+
+      h2 {
+        color: var(--color-green);
+        text-align: center;
+        font-size: 2rem;
+        padding-bottom: 0.7rem;
+        margin-bottom: 0.5rem;
+        border-bottom: solid 1px var(--color-gray);
+      }
+
+      ul {
+        flex-direction: column;
+
+        li {
+          padding: 0.5rem 0;
+
+          label::after {
+            display: none;
+          }
+
+          input,
+          button {
+            width: 300px;
+          }
+
+          small {
+            display: block;
+            width: 100%;
+            text-align: right;
+            padding: 0 0.5rem;
+            color: var(--color-danger);
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    section.left,
+    section.right {
+      width: 100%;
+    }
+
+    section.left {
+      align-items: center;
+      text-align: center;
+      gap: 0.5rem;
+
+      h2,
+      ul,
+      p {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  span {
+    display: flex;
+    background: var(--color-primary);
+    padding: 0.5rem;
+    border-radius: 50%;
+  }
+
+  strong {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--color-offwhite);
+  }
+
+  &.mini {
+    span {
+      padding: 0.25rem;
+    }
+    strong {
+      font-size: 1rem;
+    }
+  }
+}

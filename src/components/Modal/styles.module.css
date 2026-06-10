@@ -1,0 +1,43 @@
+.container {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-modal-bg);
+  z-index: 3;
+
+  & > div {
+    background: var(--color-offwhite);
+    border-radius: 5px;
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+
+    h2 {
+      text-align: center;
+      color: var(--color-offwhite);
+      padding: 1rem;
+      border-bottom: solid 1px var(--color-gray);
+      margin-bottom: 0.5rem;
+      background: linear-gradient(
+        to right,
+        var(--color-tertiary),
+        var(--color-secondary)
+      );
+    }
+
+    form {
+      padding: 0.5rem;
+
+      span {
+        text-align: center;
+      }
+    }
+  }
+}

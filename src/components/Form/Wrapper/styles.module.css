@@ -1,0 +1,130 @@
+.label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  background: #fff;
+  border: var(--border);
+  border-radius: 0.5rem;
+
+  span {
+    position: absolute;
+
+    font-weight: bold;
+    padding: 0 0.5rem;
+    top: 0.5rem;
+    left: 0;
+
+    opacity: 0.6;
+    transition: 0.5s;
+    cursor: text;
+    z-index: 1;
+
+    &::before {
+      content: '';
+      position: absolute;
+
+      background: transparent;
+      height: 2px;
+      width: 0%;
+      top: calc(50% - 1px);
+      left: 0;
+      z-index: -1;
+      transition: 0.8s;
+    }
+  }
+
+  &.required {
+    span::after {
+      content: '*';
+      position: absolute;
+      right: -0.5rem;
+      color: var(--color-danger);
+      font-size: 1.25rem;
+    }
+  }
+
+  &:hover,
+  &:has(input:focus),
+  &:has(select:focus),
+  &:has(textarea:focus) {
+    border: solid 1px var(--color-green);
+    outline: none;
+  }
+
+  &:has(input:not(:placeholder-shown)),
+  &:has(select:not([data-value=''], [data-value='0'])),
+  &:has(textarea:not(:placeholder-shown)),
+  &:has(input:focus),
+  &:has(select:focus),
+  &:has(textarea:focus) {
+    span {
+      font-size: 0.75rem;
+      top: -0.5rem;
+      left: 0.5rem;
+      opacity: 1;
+
+      &::before {
+        background: var(--color-background);
+        width: 100%;
+      }
+    }
+
+    &.required {
+      span::after {
+        font-size: 1rem;
+        right: -0.25rem;
+      }
+    }
+  }
+
+  &.hasError {
+    border: solid 1px var(--color-danger);
+
+    &:hover,
+    &:has(input:focus),
+    &:has(select:focus),
+    &:has(textarea:focus) {
+      border: solid 1px var(--color-danger);
+    }
+  }
+
+  input,
+  textarea,
+  select {
+    background: transparent;
+    padding: 0.5rem;
+    border: none;
+    flex-grow: 1;
+  }
+
+  textarea {
+    min-height: 9rem;
+    field-sizing: content;
+  }
+
+  small {
+    position: absolute;
+    display: block;
+
+    left: 0.25rem;
+    right: 0.25rem;
+    top: 100%;
+
+    color: var(--color-danger);
+    font-size: 0.75rem;
+    text-align: right;
+    overflow: hidden;
+    text-wrap: pre;
+    white-space: pre;
+    text-overflow: ellipsis;
+  }
+
+  svg {
+    position: absolute;
+    font-size: 1.25rem;
+    right: 0.5rem;
+    cursor: pointer;
+  }
+}
