@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { Wrapper, type TErrors } from '../Wrapper';
+import { Wrapper } from '../Wrapper';
 import { EyeClosedIcon, EyeIcon } from 'lucide-react';
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   name: string;
-  errors?: TErrors;
   innerRef?: React.ForwardedRef<HTMLInputElement | null>;
 };
 
@@ -15,13 +14,12 @@ export function Input({
   value,
   type = 'text',
   required,
-  errors,
   innerRef,
   ...inputProps
 }: Props) {
   const [passwordShow, setPasswordShow] = useState(false);
   return (
-    <Wrapper label={label} name={name} required={required} errors={errors}>
+    <Wrapper label={label} name={name} required={required}>
       <input
         {...inputProps}
         type={type !== 'password' ? type : passwordShow ? 'text' : 'password'}

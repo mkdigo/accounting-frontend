@@ -15,7 +15,7 @@ export class Api {
     this.request = new FetchRequest();
   }
 
-  protected abort() {
+  public abort() {
     this.request.abort();
   }
 

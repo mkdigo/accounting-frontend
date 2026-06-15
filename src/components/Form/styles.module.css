@@ -16,4 +16,15 @@
       gap: 1rem;
     }
   }
+
+  & > small {
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+
+    bottom: 1rem;
+    gap: 1rem;
+    font-size: 0.75rem;
+    padding: 0 0.5rem;
+  }
 }

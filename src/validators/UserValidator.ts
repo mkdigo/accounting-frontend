@@ -3,7 +3,7 @@ import type {
   TUserUpdateData,
   TPasswordReset,
 } from '../api/user-api';
-import type { TErrors } from '../components/Form/Wrapper';
+import type { TErrors } from '../contexts/AppContext';
 
 export class UserValidatior {
   private _errors: TErrors = {};

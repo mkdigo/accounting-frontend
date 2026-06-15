@@ -1,10 +1,9 @@
-import { Link } from 'react-router';
+import { Layout } from '../../Layout';
 
 export function BalanceSheet() {
   return (
-    <>
-      <h1>Balance Sheet</h1>
-      <Link to='/'>Home</Link>
-    </>
+    <Layout.Root>
+      <Layout.Title text='Balanço Patrimonial'></Layout.Title>
+    </Layout.Root>
   );
 }

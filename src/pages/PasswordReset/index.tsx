@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import type { TErrors } from '../../components/Form/Wrapper';
 import { Header } from '../../components/Header';
 import { VerificationCode } from '../../components/VerificationCode';
 import { Form } from '../../components/Form';
@@ -18,7 +17,8 @@ const userValidator = new UserValidatior();
 
 export function PasswordReset() {
   const navigate = useNavigate();
-  const { setIsLoading, handleNotify } = useAppContext();
+  const { setIsLoading, handleNotify, setErrors, errorsRemove } =
+    useAppContext();
   const [codeData, setCodeData] = useState<TVerificationCodeData>({
     email: '',
     code: '',
@@ -29,16 +29,10 @@ export function PasswordReset() {
   });
   const [wasCodeSent, setWasCodeSent] = useState<boolean>(false);
   const [hasToken, setHasToken] = useState<boolean>(false);
-  const [errors, setErrors] = useState<TErrors>({});
 
   function handleCodeDataChange(event: React.ChangeEvent<HTMLInputElement>) {
-    if (Object.keys(errors).includes(event.target.name)) {
-      setErrors((prev) => {
-        let updatedErrors = { ...prev };
-        delete updatedErrors[event.target.name];
-        return updatedErrors;
-      });
-    }
+    errorsRemove(event.target.name);
+
     setCodeData((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
@@ -62,6 +56,7 @@ export function PasswordReset() {
       handleNotify({ type: 'error', message });
       return;
     }
+    setErrors(undefined);
     handleNotify({ type: 'success', message: 'Código enviado' });
     setWasCodeSent(true);
   }
@@ -83,13 +78,8 @@ export function PasswordReset() {
   }
 
   function handleDataChange(event: React.ChangeEvent<HTMLInputElement>) {
-    if (Object.keys(errors).includes(event.target.name)) {
-      setErrors((prev) => {
-        let updatedErrors = { ...prev };
-        delete updatedErrors[event.target.name];
-        return updatedErrors;
-      });
-    }
+    errorsRemove(event.target.name);
+
     setData((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
@@ -99,7 +89,6 @@ export function PasswordReset() {
   async function handlePasswordResetSubmit(event: React.SubmitEvent) {
     event.preventDefault();
     if (!userValidator.isValidPasswordResetData(data)) {
-      console.log('invalid', userValidator.errors);
       setErrors(userValidator.errors);
       return;
     }
@@ -127,7 +116,6 @@ export function PasswordReset() {
     <VerificationCode
       title='Redefinição de senha'
       data={codeData}
-      errors={errors}
       onChange={handleCodeDataChange}
       sendVerificationCode={handleSendPasswordResetCode}
       verificationCodeSubmit={handlePassworResetGetTokenSubmit}
@@ -145,7 +133,6 @@ export function PasswordReset() {
             type='password'
             value={data.password}
             onChange={handleDataChange}
-            errors={errors}
             required
           />
           <Input
@@ -154,7 +141,6 @@ export function PasswordReset() {
             type='password'
             value={data.password_confirmation}
             onChange={handleDataChange}
-            errors={errors}
             required
           />
         </Form>

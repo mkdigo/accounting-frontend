@@ -1,4 +1,4 @@
-import { Wrapper, type TErrors } from '../Wrapper';
+import { Wrapper } from '../Wrapper';
 
 type Props = {
   label: string;
@@ -6,19 +6,11 @@ type Props = {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   required?: boolean;
-  errors?: TErrors;
 };
 
-export function TextArea({
-  label,
-  name,
-  value,
-  onChange,
-  required,
-  errors,
-}: Props) {
+export function TextArea({ label, name, value, onChange, required }: Props) {
   return (
-    <Wrapper label={label} name={name} required={required} errors={errors}>
+    <Wrapper label={label} name={name} required={required}>
       <textarea
         name={name}
         value={value}

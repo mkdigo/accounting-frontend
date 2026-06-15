@@ -16,6 +16,7 @@ export type TResponseError = {
   status: TErrorStatusCode;
   message: string;
   errors?: Record<string, string[]>;
+  isAborted?: true;
 };
 
 export type TResponse<T> = Promise<TResponseOk<T> | TResponseError>;

@@ -1,9 +1,8 @@
-import { Wrapper, type TErrors } from '../Wrapper';
+import { Wrapper } from '../Wrapper';
 
 type Props = React.SelectHTMLAttributes<HTMLSelectElement> & {
   label: string;
   name: string;
-  errors?: TErrors;
 };
 
 export function Select({
@@ -12,11 +11,10 @@ export function Select({
   name,
   value,
   required,
-  errors,
   ...props
 }: Props) {
   return (
-    <Wrapper label={label} name={name} required={required} errors={errors}>
+    <Wrapper label={label} name={name} required={required}>
       <select
         {...props}
         name={name}

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
-import type { TErrors } from '../../components/Form/Wrapper';
 import { VerificationCode } from '../../components/VerificationCode';
 
 import { UserApi, type TVerificationCodeData } from '../../api/user-api';
@@ -20,7 +19,8 @@ const userValidator = new UserValidatior();
 export function EmailVerify() {
   const location: TLocation = useLocation();
   const navigate = useNavigate();
-  const { setIsLoading, handleNotify } = useAppContext();
+  const { setIsLoading, handleNotify, setErrors, errorsRemove } =
+    useAppContext();
   const [data, setData] = useState<TVerificationCodeData>({
     email: location.state?.email ?? '',
     code: '',
@@ -28,16 +28,9 @@ export function EmailVerify() {
   const [wasCodeSent, setWasCodeSent] = useState<boolean>(
     location.state?.email ? true : false,
   );
-  const [errors, setErrors] = useState<TErrors>({});
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    if (Object.keys(errors).includes(event.target.name)) {
-      setErrors((prev) => {
-        let updatedErrors = { ...prev };
-        delete updatedErrors[event.target.name];
-        return updatedErrors;
-      });
-    }
+    errorsRemove(event.target.name);
     setData((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   }
 
@@ -58,6 +51,7 @@ export function EmailVerify() {
       handleNotify({ type: 'error', message });
       return;
     }
+    setErrors(undefined);
     handleNotify({ type: 'success', message: 'Código enviado' });
     setWasCodeSent(true);
   }
@@ -74,6 +68,7 @@ export function EmailVerify() {
       });
       return;
     }
+    setErrors(undefined);
     Token.set(response.data.token);
     navigate('/balance');
   }
@@ -82,7 +77,6 @@ export function EmailVerify() {
     <VerificationCode
       title='Verifique seu Email'
       data={data}
-      errors={errors}
       onChange={handleChange}
       sendVerificationCode={handleSendVerificationCode}
       verificationCodeSubmit={verificationCodeSubmit}

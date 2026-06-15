@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router';
 import { Header } from '../../components/Header';
 import { Form } from '../../components/Form';
 import { Input } from '../../components/Form/Input';
-import type { TErrors } from '../../components/Form/Wrapper';
 
 import { ZipcodeApi } from '../../api/zipcode-api';
 import { UserApi, type TUserCreateData } from '../../api/user-api';
@@ -17,7 +16,7 @@ import styles from './styles.module.css';
 
 export function Register() {
   const navigate = useNavigate();
-  const { setIsLoading, handleNotify } = useAppContext();
+  const { setIsLoading, handleNotify, errors, setErrors } = useAppContext();
   const [data, setData] = useState<TUserCreateData>({
     name: '',
     email: '',
@@ -31,7 +30,6 @@ export function Register() {
     password: '',
     password_confirmation: '',
   });
-  const [errors, setErrors] = useState<TErrors>({});
 
   useEffect(() => {
     const zipcode = data.zipcode.replace(/\D/g, '');
@@ -58,7 +56,7 @@ export function Register() {
     const response = await api.create(data);
     setIsLoading(false);
     if (!response.ok) {
-      setErrors(response.errors ?? {});
+      setErrors(response.errors);
       return;
     }
     handleNotify({ type: 'success', message: 'Registro criado com sucesso' });
@@ -84,7 +82,7 @@ export function Register() {
     const validator = new UserValidatior();
 
     if (validator.isValidCreateData(data)) {
-      if (Object.keys(errors).length > 0) setErrors({});
+      setErrors(undefined);
       return;
     }
     setErrors(validator.errors);
@@ -95,7 +93,7 @@ export function Register() {
       <main className={styles.main}>
         <Form
           onSubmit={handleSubmit}
-          submitButtonDisabled={Object.keys(errors).length > 0}
+          submitButtonDisabled={errors && true}
           cancelButtonAction='navigateBack'
         >
           <Input
@@ -105,7 +103,6 @@ export function Register() {
             onChange={handleOnChange}
             onBlur={handleValidator}
             required
-            errors={errors}
           />
           <Input
             label='E-mail'
@@ -115,7 +112,6 @@ export function Register() {
             onChange={handleOnChange}
             onBlur={handleValidator}
             required
-            errors={errors}
           />
           <Input
             label='Celular'
@@ -124,7 +120,6 @@ export function Register() {
             onChange={handleOnChange}
             onBlur={handleValidator}
             required
-            errors={errors}
           />
           <Input
             label='CEP'
@@ -133,7 +128,6 @@ export function Register() {
             onChange={handleOnChange}
             onBlur={handleValidator}
             required
-            errors={errors}
           />
           <Input
             label='Estado'
@@ -142,7 +136,6 @@ export function Register() {
             onChange={handleOnChange}
             onBlur={handleValidator}
             required
-            errors={errors}
           />
           <Input
             label='Cidade'
@@ -151,7 +144,6 @@ export function Register() {
             onChange={handleOnChange}
             onBlur={handleValidator}
             required
-            errors={errors}
           />
           <Input
             label='Bairro'
@@ -160,7 +152,6 @@ export function Register() {
             onChange={handleOnChange}
             onBlur={handleValidator}
             required
-            errors={errors}
           />
           <Input
             label='Endereço'
@@ -169,7 +160,6 @@ export function Register() {
             onChange={handleOnChange}
             onBlur={handleValidator}
             required
-            errors={errors}
           />
           <Input
             label='Nome de usuário'
@@ -178,7 +168,6 @@ export function Register() {
             onChange={handleOnChange}
             onBlur={handleValidator}
             required
-            errors={errors}
           />
           <Input
             label='Senha'
@@ -188,7 +177,6 @@ export function Register() {
             onChange={handleOnChange}
             onBlur={handleValidator}
             required
-            errors={errors}
           />
           <Input
             label='Confirmar Senha'
@@ -198,7 +186,6 @@ export function Register() {
             onChange={handleOnChange}
             onBlur={handleValidator}
             required
-            errors={errors}
           />
         </Form>
       </main>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { XIcon } from 'lucide-react';
 
-import { Wrapper, type TErrors } from '../Wrapper';
+import { Wrapper } from '../Wrapper';
 
 import { useOnKeyUp } from '../../../hooks/useOnKeyUp';
 
@@ -15,7 +15,6 @@ type TListItem = {
 type Props = {
   label: string;
   name: string;
-  errors?: TErrors;
   list: TListItem[];
   onChange?: (value: string | null) => void;
   required?: boolean;
@@ -24,14 +23,7 @@ type Props = {
 
 let isFocused: boolean = false;
 
-export function SearchSelect({
-  label,
-  name,
-  required,
-  errors,
-  list,
-  onChange,
-}: Props) {
+export function SearchSelect({ label, name, required, list, onChange }: Props) {
   const listRef = useRef<HTMLUListElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [filteredList, setFilteredList] = useState<TListItem[]>([]);
@@ -151,7 +143,6 @@ export function SearchSelect({
       label={label}
       name={name}
       required={required}
-      errors={errors}
       className={styles.wrapper}
       onFocus={handleFocus}
       onBlur={handleBlur}

@@ -33,8 +33,12 @@ export class FetchRequest implements RequestInterface {
         Authorization: `Bearer ${Token.get()}`,
       });
     } else {
-      body = JSON.stringify(body);
+      if (body) body = JSON.stringify(body);
     }
+
+    if (method === 'GET' || method === 'DELETE')
+      this.headers.delete('Content-Type');
+
     this.method = method;
     this.url = `${BASE_URL}${url}`;
     this.body = body;
@@ -124,6 +128,7 @@ export class FetchRequest implements RequestInterface {
         ok: false,
         status: 500,
         message: e.message,
+        isAborted: e.name === 'AbortError' ? true : undefined,
       };
     }
   }

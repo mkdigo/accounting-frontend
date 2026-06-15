@@ -24,4 +24,10 @@
       font-size: 1rem;
     }
   }
+
+  @media print {
+    strong {
+      color: #000;
+    }
+  }
 }

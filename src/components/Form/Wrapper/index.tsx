@@ -1,12 +1,11 @@
 import { useMemo } from 'react';
+import { useAppContext } from '../../../hooks/useAppContext';
 import styles from './styles.module.css';
 
-export type TErrors = Record<string, string[]>;
 type TWrapper = {
   label: string;
   name: string;
   required?: boolean;
-  errors?: TErrors;
 };
 type Props = React.LabelHTMLAttributes<HTMLLabelElement> & TWrapper;
 
@@ -15,10 +14,10 @@ export function Wrapper({
   name,
   label,
   children,
-  errors,
   className,
   ...props
 }: Props) {
+  const { errors } = useAppContext();
   const error: string[] = useMemo(() => {
     return errors && Object.keys(errors).includes(name) ? errors[name] : [];
   }, [errors]);

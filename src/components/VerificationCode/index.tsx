@@ -2,7 +2,6 @@ import type { TVerificationCodeData } from '../../api/user-api';
 import { Button } from '../Button';
 import { Form } from '../Form';
 import { Input } from '../Form/Input';
-import type { TErrors } from '../Form/Wrapper';
 import { Header } from '../Header';
 
 import styles from './styles.module.css';
@@ -14,14 +13,12 @@ type Props = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   sendVerificationCode: () => void;
   verificationCodeSubmit: (event: React.SubmitEvent) => void;
-  errors: TErrors;
 };
 
 export function VerificationCode({
   title,
   data,
   wasCodeSent,
-  errors,
   onChange,
   sendVerificationCode,
   verificationCodeSubmit,
@@ -49,7 +46,6 @@ export function VerificationCode({
                 name='email'
                 value={data.email}
                 onChange={onChange}
-                errors={errors}
                 required
               />
             </Form>
@@ -62,7 +58,6 @@ export function VerificationCode({
               name='code'
               value={data.code}
               onChange={onChange}
-              errors={errors}
               autoComplete='one-time-code'
               required
             />

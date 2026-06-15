@@ -14,6 +14,7 @@ import { Login } from './pages/Login/index.tsx';
 import { Register } from './pages/Register/index.tsx';
 import { EmailVerify } from './pages/EmailVerify/index.tsx';
 import { PasswordReset } from './pages/PasswordReset/index.tsx';
+import { Companies } from './pages/Companies/index.tsx';
 
 export const router = createBrowserRouter(
   [
@@ -47,6 +48,10 @@ export const router = createBrowserRouter(
         {
           path: '/balance',
           Component: BalanceSheet,
+        },
+        {
+          path: '/companies',
+          Component: Companies,
         },
       ],
     },

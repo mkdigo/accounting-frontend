@@ -35,9 +35,15 @@
     form {
       padding: 0.5rem;
 
-      span {
+      span,
+      p {
         text-align: center;
       }
+    }
+
+    & > p {
+      padding: 0.5rem 0.5rem 1rem;
+      text-align: center;
     }
   }
 }

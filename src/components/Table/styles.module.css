@@ -1,0 +1,35 @@
+.table {
+  max-width: 100%;
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    background: var(--color-light-gray);
+  }
+
+  tr {
+    &:focus {
+      border: solid 2px var(--color-primary);
+    }
+    th,
+    td {
+      padding: 0.5rem;
+      text-align: center;
+      border: var(--border);
+
+      /* &:nth-child(2) {
+        text-align: left;
+      } */
+    }
+  }
+
+  tbody {
+    tr {
+      cursor: pointer;
+
+      &:hover {
+        color: var(--color-dark-green);
+      }
+    }
+  }
+}
