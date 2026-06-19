@@ -4,7 +4,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   color?: 'primary' | 'secondary' | 'transparent' | 'danger' | 'link' | 'gray';
   textColor?: 'default' | 'white' | 'dark' | 'danger';
   icon?: React.ReactElement;
-  mini?: boolean;
+  size?: 'default' | 'medium' | 'mini';
 };
 
 export function Button({
@@ -14,7 +14,7 @@ export function Button({
   textColor = 'default',
   type = 'button',
   icon,
-  mini = false,
+  size = 'default',
   ...props
 }: ButtonProps) {
   return (
@@ -24,7 +24,7 @@ export function Button({
         styles.button,
         styles[`color_${color}`],
         styles[`text_color_${textColor}`],
-        mini ? styles.mini : '',
+        styles[`size_${size}`],
         className,
       ].join(' ')}
       type={type}

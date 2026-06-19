@@ -18,7 +18,11 @@ export type FormState<T> = {
   errors?: TErrors;
 } | void;
 
+type TLang = 'ptBR';
+
 type TAppContext = {
+  lang: TLang;
+  setLang: React.Dispatch<React.SetStateAction<TLang>>;
   errors: TErrors | undefined;
   setErrors: React.Dispatch<React.SetStateAction<TErrors | undefined>>;
   errorsAppend: (input: TErrorsAppendInput) => void;
@@ -35,7 +39,6 @@ type TAppContext = {
   companies: TCompany[];
   setCompanies: React.Dispatch<React.SetStateAction<TCompany[]>>;
   currentCompany: TCompany | undefined;
-  // setCurrentCompany: React.Dispatch<React.SetStateAction<TCompany | undefined>>;
   changeCurrentCompany: (data: string | TCompany) => void;
 };
 
@@ -46,6 +49,7 @@ export function AppContextProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [lang, setLang] = useState<TLang>('ptBR');
   const [errors, setErrors] = useState<TErrors>();
   const [isLoading, setIsLoading] = useState(false);
   const [isTransitionLoading, setIsTransitionLoading] = useOptimistic(
@@ -120,6 +124,8 @@ export function AppContextProvider({
   return (
     <AppContext.Provider
       value={{
+        lang,
+        setLang,
         errors,
         setErrors,
         errorsAppend,
@@ -136,7 +142,6 @@ export function AppContextProvider({
         companies,
         setCompanies,
         currentCompany,
-        // setCurrentCompany,
         changeCurrentCompany,
       }}
     >

@@ -190,7 +190,7 @@ export function Companies() {
             <Button
               color='link'
               textColor='danger'
-              mini
+              size='medium'
               onClick={handleCompanyDeleteOpenModal}
             >
               Excluir empresa

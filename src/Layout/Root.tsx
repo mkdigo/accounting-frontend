@@ -7,6 +7,7 @@ import { useAppContext } from '../hooks/useAppContext';
 import { Company } from '../utils/company';
 
 import styles from './styles.module.css';
+import { useNavigate } from 'react-router';
 
 type Props = {
   children: React.ReactNode;
@@ -16,6 +17,7 @@ type Props = {
 export function Root({ children, printHeader = true }: Props) {
   const { loader, handleNotify, setCompanies, changeCurrentCompany } =
     useAppContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const api = new CompanyApi();
@@ -33,6 +35,7 @@ export function Root({ children, printHeader = true }: Props) {
       setCompanies(companies);
       if (companies.length === 0) {
         Company.removeCompanyId();
+        navigate('/companies');
         return;
       }
       const selectedCompanyId = Company.getCompanyId();

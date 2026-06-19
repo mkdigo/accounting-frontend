@@ -15,6 +15,7 @@ import { Register } from './pages/Register/index.tsx';
 import { EmailVerify } from './pages/EmailVerify/index.tsx';
 import { PasswordReset } from './pages/PasswordReset/index.tsx';
 import { Companies } from './pages/Companies/index.tsx';
+import { Accounts } from './pages/Accounts/index.tsx';
 
 export const router = createBrowserRouter(
   [
@@ -52,6 +53,10 @@ export const router = createBrowserRouter(
         {
           path: '/companies',
           Component: Companies,
+        },
+        {
+          path: '/accounts',
+          Component: Accounts,
         },
       ],
     },

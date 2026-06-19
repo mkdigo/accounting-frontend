@@ -9,12 +9,10 @@
 
   border-radius: var(--border-radius);
 
-  div {
-    &:last-child {
-      display: flex;
-      justify-content: flex-end;
-      gap: 1rem;
-    }
+  & > div:last-child {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
   }
 
   & > small {

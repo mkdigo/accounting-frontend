@@ -1,0 +1,24 @@
+.tag {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: var(--border);
+  border-radius: var(--rounded);
+  padding: 0.5rem;
+
+  & > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .x {
+    position: absolute;
+    z-index: 1;
+    color: var(--color-danger);
+    right: 1rem;
+    top: 0.9rem;
+    cursor: pointer;
+  }
+}

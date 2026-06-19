@@ -93,22 +93,32 @@ export function SideBar({ printHeader = true }: Props) {
         className={menuActived ? styles.menuActived : ''}
         onClick={() => setMenuActived(false)}
       >
-        <li>
-          <select
-            onClick={(e) => e.stopPropagation()}
-            onChange={handleCompanySelect}
-            value={currentCompany?.id}
-          >
-            {companies.map((company) => (
-              <option value={company.id} key={`sidebar-company-${company.id}`}>
-                {company.name}
-              </option>
-            ))}
-          </select>
-        </li>
-        <li>
-          <CustomLink to='/balance'>Balanço Patrimonial</CustomLink>
-        </li>
+        {companies.length > 0 && (
+          <>
+            <li>
+              <select
+                onClick={(e) => e.stopPropagation()}
+                onChange={handleCompanySelect}
+                value={currentCompany?.id}
+              >
+                {companies.map((company) => (
+                  <option
+                    value={company.id}
+                    key={`sidebar-company-${company.id}`}
+                  >
+                    {company.name}
+                  </option>
+                ))}
+              </select>
+            </li>
+            <li>
+              <CustomLink to='/balance'>Balanço Patrimonial</CustomLink>
+            </li>
+            <li>
+              <CustomLink to='/accounts'>Contas</CustomLink>
+            </li>
+          </>
+        )}
         <li>
           <CustomLink to='/companies'>Empresas</CustomLink>
         </li>
