@@ -83,7 +83,7 @@ export class AccountApi extends Api {
     return this.request.put(`/accounts/${id}`, data);
   }
 
-  async delete(id: string): TResponse<{ account: TAccount }> {
+  async delete(id: string): TResponse<void> {
     return this.request.delete(`/accounts/${id}`);
   }
 

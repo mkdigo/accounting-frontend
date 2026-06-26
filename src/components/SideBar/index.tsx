@@ -115,6 +115,9 @@ export function SideBar({ printHeader = true }: Props) {
               <CustomLink to='/balance'>Balanço Patrimonial</CustomLink>
             </li>
             <li>
+              <CustomLink to='/entries'>Lançamentos</CustomLink>
+            </li>
+            <li>
               <CustomLink to='/accounts'>Contas</CustomLink>
             </li>
           </>

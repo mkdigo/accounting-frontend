@@ -16,6 +16,7 @@ import { EmailVerify } from './pages/EmailVerify/index.tsx';
 import { PasswordReset } from './pages/PasswordReset/index.tsx';
 import { Companies } from './pages/Companies/index.tsx';
 import { Accounts } from './pages/Accounts/index.tsx';
+import { Entries } from './pages/Entries/index.tsx';
 
 export const router = createBrowserRouter(
   [
@@ -49,6 +50,10 @@ export const router = createBrowserRouter(
         {
           path: '/balance',
           Component: BalanceSheet,
+        },
+        {
+          path: '/entries',
+          Component: Entries,
         },
         {
           path: '/companies',

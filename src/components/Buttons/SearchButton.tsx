@@ -3,10 +3,6 @@ import { Button, type ButtonProps } from '../Button';
 
 type Props = Omit<ButtonProps, 'icon'>;
 
-export function SearchButton({
-  title = 'Buscar',
-  type = undefined,
-  ...rest
-}: Props) {
+export function SearchButton({ title = 'Buscar', ...rest }: Props) {
   return <Button title={title} color='gray' {...rest} icon={<SearchIcon />} />;
 }

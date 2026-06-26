@@ -10,6 +10,10 @@
 
     @media print {
       padding: 1rem 0;
+      scrollbar-width: none !important; /* Firefox */
+      &::-webkit-scrollbar {
+        display: none !important; /* Chrome, Safari e Edge */
+      }
     }
 
     .title {

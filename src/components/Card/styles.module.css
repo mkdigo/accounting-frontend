@@ -6,6 +6,10 @@
   border: var(--border);
   border-radius: var(--border-radius);
 
+  @media print {
+    break-inside: avoid;
+  }
+
   &:not(:first-child) {
     margin-top: 1rem;
   }

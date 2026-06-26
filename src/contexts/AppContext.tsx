@@ -18,7 +18,7 @@ export type FormState<T> = {
   errors?: TErrors;
 } | void;
 
-type TLang = 'ptBR';
+export type TLang = 'ptBR';
 
 type TAppContext = {
   lang: TLang;

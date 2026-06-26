@@ -74,6 +74,10 @@ body {
   @media print {
     background: unset;
     font-size: 12px;
+    scrollbar-width: none !important; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none !important; /* Chrome, Safari e Edge */
+    }
   }
 }
 
