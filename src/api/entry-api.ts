@@ -1,6 +1,7 @@
 import { DateTime } from '@mkdigo/datetime';
 import { Api } from './base/api';
 import type { TResponse } from './base/request-interface';
+import type { TAccountSubgroup } from './account-api';
 
 export type TEntryData = {
   id?: string;
@@ -27,6 +28,7 @@ export type TEntrySearchParams = {
   end: string;
   search: string;
   lastId?: string;
+  subgroup?: TAccountSubgroup;
 };
 
 export class EntryApi extends Api {

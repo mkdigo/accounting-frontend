@@ -17,6 +17,7 @@ import { PasswordReset } from './pages/PasswordReset/index.tsx';
 import { Companies } from './pages/Companies/index.tsx';
 import { Accounts } from './pages/Accounts/index.tsx';
 import { Entries } from './pages/Entries/index.tsx';
+import { Expenses } from './pages/Expenses/index.tsx';
 
 export const router = createBrowserRouter(
   [
@@ -54,6 +55,10 @@ export const router = createBrowserRouter(
         {
           path: '/entries',
           Component: Entries,
+        },
+        {
+          path: '/expenses',
+          Component: Expenses,
         },
         {
           path: '/companies',

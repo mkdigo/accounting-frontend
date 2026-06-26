@@ -118,6 +118,9 @@ export function SideBar({ printHeader = true }: Props) {
               <CustomLink to='/entries'>Lançamentos</CustomLink>
             </li>
             <li>
+              <CustomLink to='/expenses'>Despesas</CustomLink>
+            </li>
+            <li>
               <CustomLink to='/accounts'>Contas</CustomLink>
             </li>
           </>

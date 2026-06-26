@@ -64,7 +64,8 @@ export function useEntries(): IUseEntries {
       if (entryResponse.ok) {
         const entries = entryResponse.data.entries;
         setEntries(entries);
-        setEntriesLastId(entries[entries.length - 1].id);
+        if (entries.length > 0)
+          setEntriesLastId(entries[entries.length - 1].id);
       }
     });
     return () => {
