@@ -1,0 +1,181 @@
+.selectDate {
+  margin-bottom: 1rem;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+
+    label {
+      font-weight: bold;
+      padding-left: 0.5rem;
+    }
+
+    input,
+    select {
+      width: 100px;
+    }
+  }
+
+  @media print {
+    position: absolute;
+    top: 3.25rem;
+    right: -1.75rem;
+
+    li {
+      label {
+        display: block !important;
+        border: none;
+        padding: 0 !important;
+
+        span {
+          position: relative !important;
+          top: unset !important;
+          left: unset !important;
+
+          &::before {
+            display: none !important;
+          }
+        }
+
+        input,
+        select {
+          appearance: none;
+          padding: 0 !important;
+          width: 50px;
+
+          border: none;
+        }
+      }
+    }
+  }
+}
+
+.balance {
+  display: flex;
+  flex-wrap: wrap;
+  /* margin-bottom: 1rem; */
+
+  h2 {
+    padding: 0.5rem;
+    background: var(--color-gray);
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    border: solid 1px var(--color-gray);
+
+    div {
+      width: 100%;
+      border: none;
+
+      ul {
+        display: flex;
+        flex-direction: column;
+
+        li {
+          border-top: solid 1px var(--color-gray);
+          display: flex;
+          justify-content: space-between;
+          padding: 0.5rem;
+
+          & + li {
+            padding-left: 1.5rem;
+          }
+        }
+      }
+    }
+    div.amount {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    @media (max-width: 1025px) {
+      width: 100%;
+    }
+  }
+
+  @media print {
+    h2 {
+      padding: 0.25rem;
+    }
+
+    div {
+      div {
+        ul {
+          display: block;
+
+          li {
+            display: inline-block;
+            width: 100%;
+            break-inside: always;
+            padding: 0.25rem;
+
+            & + li {
+              padding-left: 0.75rem;
+            }
+
+            strong,
+            span {
+              display: inline-block;
+              width: 50%;
+            }
+
+            strong,
+            span {
+              &:nth-child(2) {
+                text-align: right;
+              }
+            }
+          }
+        }
+      }
+    }
+    .assets {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.incomeStatementTitle {
+  page-break-before: always;
+}
+
+.incomeStatement {
+  border: solid 1px var(--color-gray);
+
+  ul {
+    flex-direction: column;
+
+    h2 {
+      padding: 0.5rem;
+      background: var(--color-gray);
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem;
+      border-top: solid 1px var(--color-gray);
+    }
+
+    li.netIncome {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media print {
+    ul {
+      h2 {
+        padding: 0.25rem;
+      }
+
+      li {
+        padding: 0.25rem;
+      }
+    }
+  }
+}

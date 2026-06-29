@@ -49,6 +49,9 @@ export class AccountTranslations {
       expenses: {
         ptBR: 'Despesas',
       },
+      taxes: {
+        ptBR: 'Impostos',
+      },
     };
     return translations[subgroup];
   }

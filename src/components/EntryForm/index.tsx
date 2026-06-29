@@ -50,7 +50,7 @@ export function EntryForm({
       id: entry.id,
       debitId: entry.debit_id,
       creditId: entry.credit_id,
-      inclusion: DateTime.utcDateToLocale(entry.inclusion),
+      inclusion: entry.inclusion,
       note: entry.note,
       value: entry.value,
     });

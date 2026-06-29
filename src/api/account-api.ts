@@ -12,11 +12,26 @@ export const accountGroups = {
     subgroup: [],
   },
   income_statement_accounts: {
-    subgroup: ['revenues', 'costs', 'expenses'],
+    subgroup: ['revenues', 'costs', 'expenses', 'taxes'],
   },
 } as const;
 
-export const accountSubgroups = {
+type TTags = {
+  tags: string[];
+};
+
+type TAccountSubgroupTags = Record<
+  (typeof accountGroups.assets.subgroup)[number],
+  TTags
+> &
+  Record<(typeof accountGroups.liabilities.subgroup)[number], TTags> &
+  Record<(typeof accountGroups.equity.subgroup)[number], TTags> &
+  Record<
+    (typeof accountGroups.income_statement_accounts.subgroup)[number],
+    TTags
+  >;
+
+export const accountSubgroups: TAccountSubgroupTags = {
   current_assets: {
     tags: ['bank', 'accounts_receivable'],
   },
@@ -36,6 +51,9 @@ export const accountSubgroups = {
     tags: [],
   },
   expenses: {
+    tags: [],
+  },
+  taxes: {
     tags: [],
   },
 } as const;

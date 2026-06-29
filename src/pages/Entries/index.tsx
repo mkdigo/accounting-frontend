@@ -1,5 +1,3 @@
-import { DateTime } from '@mkdigo/datetime';
-
 import { Layout } from '../../Layout';
 import { Modal } from '../../components/Modal';
 import { PrintButton } from '../../components/Buttons/PrintButton';
@@ -70,10 +68,7 @@ export function Entries() {
             ref={i + 1 === entries.length ? lastEntryRef : undefined}
           >
             <Card.Table.Root>
-              <Card.Table.Row
-                label='Data'
-                content={DateTime.utcDateToLocale(entry.inclusion)}
-              />
+              <Card.Table.Row label='Data' content={entry.inclusion} />
               <Card.Table.Row label='Débito' content={entry.debit_name} />
               <Card.Table.Row label='Crédito' content={entry.credit_name} />
               <Card.Table.Row
@@ -81,7 +76,6 @@ export function Entries() {
                 content={NumberHandler.currency(entry.value)}
               />
               <Card.Table.Row label='Notas' content={entry.note} />
-              <Card.Table.Row label='key' content={entry.id} />
             </Card.Table.Root>
             <Card.Buttons>
               <PencilButton

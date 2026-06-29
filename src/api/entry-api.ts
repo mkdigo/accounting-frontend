@@ -49,14 +49,12 @@ export class EntryApi extends Api {
   ): Promise<TResponse<{ entry: TEntry }>> {
     return this.request.post(`/companies/${companyId}/entries`, {
       ...data,
-      inclusion: DateTime.localeDateToUTC(data.inclusion),
     });
   }
 
   public async update(data: TEntryData): Promise<TResponse<{ entry: TEntry }>> {
     return this.request.put(`/entries/${data.id}`, {
       ...data,
-      inclusion: DateTime.localeDateToUTC(data.inclusion),
     });
   }
 

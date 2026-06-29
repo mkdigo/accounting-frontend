@@ -216,10 +216,7 @@ export function Expenses() {
             ref={i + 1 === entries.length ? lastEntryRef : undefined}
           >
             <Card.Table.Root>
-              <Card.Table.Row
-                label='Data'
-                content={DateTime.utcDateToLocale(entry.inclusion)}
-              />
+              <Card.Table.Row label='Data' content={entry.inclusion} />
               <Card.Table.Row label='Débito' content={entry.debit_name} />
               <Card.Table.Row label='Crédito' content={entry.credit_name} />
               <Card.Table.Row
