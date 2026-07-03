@@ -15,10 +15,10 @@
 
   &:focus {
     box-shadow:
-      1px 0px 0px #000,
-      -1px 0px 0px #000,
-      0px 1px 0px #000,
-      0px -1px 0px #000;
+      1.5px 0px 0px #000,
+      -1.5px 0px 0px #000,
+      0px 1.5px 0px #000,
+      0px -1.5px 0px #000;
   }
 
   .icon {
