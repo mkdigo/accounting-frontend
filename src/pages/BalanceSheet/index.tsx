@@ -244,7 +244,13 @@ const BalanceSheet: React.FC = () => {
               ))}
               <li>
                 <span>Lucros Acumulados</span>
-                <span>
+                <span
+                  className={
+                    balanceSheet.amounts.retainedEarnings < 0
+                      ? styles.isNegative
+                      : ''
+                  }
+                >
                   {NumberHandler.currency(
                     balanceSheet.amounts.retainedEarnings,
                   )}
@@ -328,7 +334,13 @@ const BalanceSheet: React.FC = () => {
           </li>
           <li>
             <strong>Lucro/Prejuizo antes dos impostos</strong>
-            <strong>
+            <strong
+              className={
+                incomeStatement.amounts.incomeBeforeTaxes < 0
+                  ? styles.isNegative
+                  : ''
+              }
+            >
               {NumberHandler.currency(
                 incomeStatement.amounts.incomeBeforeTaxes,
               )}
@@ -342,7 +354,13 @@ const BalanceSheet: React.FC = () => {
           ))}
           <li className='netIncome'>
             <strong>Lucro/Prejuizo depois dos impostos</strong>
-            <strong>
+            <strong
+              className={
+                incomeStatement.amounts.incomeAfterTaxes < 0
+                  ? styles.isNegative
+                  : ''
+              }
+            >
               {NumberHandler.currency(incomeStatement.amounts.incomeAfterTaxes)}
             </strong>
           </li>
