@@ -3,6 +3,7 @@ import styles from './styles.module.css';
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   color?: 'primary' | 'secondary' | 'transparent' | 'danger' | 'link' | 'gray';
   textColor?: 'default' | 'white' | 'dark' | 'danger';
+  center?: boolean;
   icon?: React.ReactElement;
   size?: 'default' | 'medium' | 'mini';
 };
@@ -12,6 +13,7 @@ export function Button({
   className,
   color = 'primary',
   textColor = 'default',
+  center = false,
   type = 'button',
   icon,
   size = 'default',
@@ -28,6 +30,9 @@ export function Button({
         className,
       ].join(' ')}
       type={type}
+      style={{
+        ['--align' as string]: center ? 'center' : 'flex-start',
+      }}
     >
       {icon && <span className={styles.icon}>{icon}</span>}
       {children}

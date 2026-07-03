@@ -112,7 +112,9 @@ export function Login() {
                 )}
               </li>
               <li>
-                <Button type='submit'>Entrar</Button>
+                <Button type='submit' center>
+                  Entrar
+                </Button>
               </li>
             </ul>
           </form>

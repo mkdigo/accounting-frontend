@@ -1,4 +1,5 @@
 .button {
+  --align: 'flex-start';
   position: relative;
   display: flex;
   align-items: center;
@@ -7,6 +8,7 @@
   min-width: 35px;
   padding: 0.5rem;
   gap: 0.5rem;
+  justify-content: var(--align);
   border: none;
   border-radius: 0.25rem;
   overflow: hidden;
