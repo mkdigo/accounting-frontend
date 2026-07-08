@@ -10,13 +10,13 @@ import { EntryForm } from '../../components/EntryForm';
 import { Form } from '../../components/Form';
 
 import { useAppContext } from '../../hooks/useAppContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import { useEntries } from './useEntries';
 import { NumberHandler } from '../../utils/NumberHandler';
 
 export function Entries() {
   const {
     filterData,
-    accounts,
     entries,
     setEntries,
     handleSearchSubmit,
@@ -29,6 +29,7 @@ export function Entries() {
   } = useEntries();
 
   const { handleOpenModal } = useAppContext();
+  const { accounts } = useAuthContext();
 
   return (
     <Layout.Root>

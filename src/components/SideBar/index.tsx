@@ -9,6 +9,7 @@ import {
 import { MenuIcon } from 'lucide-react';
 
 import { useAppContext } from '../../hooks/useAppContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 import { AuthApi } from '../../api/auth-api';
 import { Token } from '../../utils/token';
@@ -33,13 +34,8 @@ type Props = {
 };
 
 export function SideBar({ printHeader = true }: Props) {
-  const {
-    setIsLoading,
-    handleNotify,
-    companies,
-    currentCompany,
-    changeCurrentCompany,
-  } = useAppContext();
+  const { setIsLoading, handleNotify } = useAppContext();
+  const { companies, currentCompany, changeCurrentCompany } = useAuthContext();
   const navigate = useNavigate();
   const [menuActived, setMenuActived] = useState<boolean>(false);
 

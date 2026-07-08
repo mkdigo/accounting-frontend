@@ -6,6 +6,7 @@ import { Input } from '../../components/Form/Input';
 import { Button } from '../../components/Button';
 
 import { useAppContext } from '../../hooks/useAppContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import { AuthApi, type TLoginInput } from '../../api/auth-api';
 import { Token } from '../../utils/token';
 
@@ -19,6 +20,7 @@ export function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const { setIsLoading } = useAppContext();
+  const { loadData } = useAuthContext();
 
   const [data, setData] = useState<TLoginInput>({
     username: '',
@@ -54,6 +56,7 @@ export function Login() {
     }
 
     Token.set(response.data.token);
+    loadData();
     navigate(path);
   };
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { DateTime } from '@mkdigo/datetime';
 
-import { AccountApi, type TAccount } from '../../api/account-api';
+import { type TAccount } from '../../api/account-api';
 import {
   EntryApi,
   type TEntry,
@@ -18,20 +18,18 @@ import { PencilButton } from '../../components/Buttons/PencilButton';
 import { TrashButton } from '../../components/Buttons/TrashButton';
 import { Form } from '../../components/Form';
 import { EntryForm } from '../../components/EntryForm';
+
 import { useAppContext } from '../../hooks/useAppContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const dateTime = new DateTime();
 dateTime.subtractMonth(6);
 dateTime.setDay(1);
 
 export function Expenses() {
-  const {
-    loader,
-    handleNotify,
-    handleCloseModal,
-    handleOpenModal,
-    currentCompany,
-  } = useAppContext();
+  const { loader, handleNotify, handleCloseModal, handleOpenModal } =
+    useAppContext();
+  const { currentCompany, accounts } = useAuthContext();
   const [debitAccounts, setDebitAccounts] = useState<TAccount[]>([]);
   const [creditAccounts, setCreditAccounts] = useState<TAccount[]>([]);
   const [entries, setEntries] = useState<TEntry[]>([]);
@@ -55,28 +53,19 @@ export function Expenses() {
   const [entriesLastId, setEntriesLastId] = useState<string>();
   const lastEntryRef = useRef<HTMLDivElement>(null);
 
-  // Get Accounts
+  // Accounts filter
   useEffect(() => {
-    if (!currentCompany) return;
-    loader(async () => {
-      const api = new AccountApi();
+    const debits = accounts.filter(
+      (account) =>
+        account.subgroup === 'costs' || account.subgroup === 'expenses',
+    );
+    setDebitAccounts(debits);
 
-      const response = await api.list(currentCompany.id);
-
-      if (!response.ok) return;
-
-      const debits = response.data.accounts.filter(
-        (account) =>
-          account.subgroup === 'costs' || account.subgroup === 'expenses',
-      );
-      setDebitAccounts(debits);
-
-      const credits = response.data.accounts.filter(
-        (account) => account.subgroup === 'current_assets',
-      );
-      setCreditAccounts(credits);
-    });
-  }, [currentCompany]);
+    const credits = accounts.filter(
+      (account) => account.subgroup === 'current_assets',
+    );
+    setCreditAccounts(credits);
+  }, [accounts]);
 
   async function getEntries(lastId?: string) {
     if (!currentCompany) return;
@@ -104,7 +93,16 @@ export function Expenses() {
 
   // Get Entries
   useEffect(() => {
-    getEntries();
+    if (!currentCompany) return;
+    const api = new EntryApi();
+    (async () => {
+      let params: TEntrySearchParams = { ...filterData };
+      const response = await api.list(currentCompany.id, params);
+      if (!response.ok) return;
+      const entries = response.data.entries;
+      setEntries(entries);
+      if (entries.length > 0) setEntriesLastId(entries[entries.length - 1].id);
+    })();
   }, [currentCompany]);
 
   // Infine Scroll

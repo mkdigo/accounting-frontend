@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useAppContext } from '../../hooks/useAppContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import {
   BalanceSheetApi,
   type TBalanceSheet,
@@ -21,7 +22,8 @@ interface IYearMonth {
 }
 
 const BalanceSheet: React.FC = () => {
-  const { loader, currentCompany } = useAppContext();
+  const { loader } = useAppContext();
+  const { currentCompany } = useAuthContext();
   const today = new Date();
   const thisYear = String(today.getFullYear());
   const thisMonth =

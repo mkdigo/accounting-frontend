@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useAppContext } from '../../hooks/useAppContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import {
   AccountApi,
   accountSubgroups,
@@ -31,9 +32,8 @@ export function Accounts() {
     handleNotify,
     loader,
     isTransitionLoading,
-    currentCompany,
   } = useAppContext();
-  const [accounts, setAccounts] = useState<TAccount[]>([]);
+  const { currentCompany, accounts, setAccounts } = useAuthContext();
 
   const [selectedAccount, setSelectedAccount] = useState<TAccount>();
   const [availableTags, setAvailableTags] = useState<TTagName[]>([]);

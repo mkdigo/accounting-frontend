@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { Form } from '../Form';
-import { useAppContext } from '../../hooks/useAppContext';
 import { Select } from '../Form/Select';
 import { Input } from '../Form/Input';
+import { TagSelect } from '../TagSelect';
+
+import { useAppContext } from '../../hooks/useAppContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import {
   AccountApi,
   accountGroups,
@@ -12,7 +15,6 @@ import {
   type TAccountSubgroup,
 } from '../../api/account-api';
 import { AccountTranslations } from '../../translations/account-translations';
-import { TagSelect } from '../TagSelect';
 
 type Props = {
   account?: TAccount;
@@ -26,10 +28,10 @@ export function AccountForm({ account, setAccounts }: Props) {
     isTransitionLoading,
     handleNotify,
     handleCloseModal,
-    currentCompany,
     setErrors,
     errorsRemove,
   } = useAppContext();
+  const { currentCompany } = useAuthContext();
   const [data, setData] = useState<TAccountCreateData>({
     company_id: '',
     name: '',

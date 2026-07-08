@@ -10,6 +10,7 @@ import { Button } from '../../components/Button';
 
 import { useAppContext } from '../../hooks/useAppContext';
 import type { FormState } from '../../contexts/AppContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import {
   CompanyApi,
   type TCompany,
@@ -26,12 +27,9 @@ export function Companies() {
     setIsTransitionLoading,
     handleOpenModal,
     handleCloseModal,
-    companies,
-    setCompanies,
-    currentCompany,
-    // setCurrentCompany,
-    changeCurrentCompany,
   } = useAppContext();
+  const { companies, setCompanies, currentCompany, changeCurrentCompany } =
+    useAuthContext();
 
   const [createState, companyCreateAction] = useActionState(
     handleCompanyCreateAction,

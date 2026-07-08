@@ -7,6 +7,7 @@ import { SelectWithFilter } from '../Form/SelectWithFilter';
 import { TextArea } from '../Form/TextArea';
 
 import { useAppContext } from '../../hooks/useAppContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import type { TAccount } from '../../api/account-api';
 import { EntryApi, type TEntry, type TEntryData } from '../../api/entry-api';
 import { NumberHandler } from '../../utils/NumberHandler';
@@ -30,10 +31,10 @@ export function EntryForm({
     loader,
     isTransitionLoading,
     handleNotify,
-    currentCompany,
     setErrors,
     errorsRemove,
   } = useAppContext();
+  const { currentCompany } = useAuthContext();
   const [data, setData] = useState<TEntryData>({
     inclusion: today.getDate(),
     debitId: '',

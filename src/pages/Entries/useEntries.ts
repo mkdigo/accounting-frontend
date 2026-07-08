@@ -2,16 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 import { DateTime } from '@mkdigo/datetime';
 
 import { useAppContext } from '../../hooks/useAppContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import {
   EntryApi,
   type TEntry,
   type TEntrySearchParams,
 } from '../../api/entry-api';
-import { AccountApi, type TAccount } from '../../api/account-api';
 
 interface IUseEntries {
   filterData: TEntrySearchParams;
-  accounts: TAccount[];
   entries: TEntry[];
   setEntries: React.Dispatch<React.SetStateAction<TEntry[]>>;
   handleFilterInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -29,20 +28,15 @@ startDateTime.setDay(1);
 const endDateTime = new DateTime();
 
 export function useEntries(): IUseEntries {
-  const {
-    loader,
-    handleCloseModal,
-    handleOpenModal,
-    handleNotify,
-    currentCompany,
-  } = useAppContext();
+  const { loader, handleCloseModal, handleOpenModal, handleNotify } =
+    useAppContext();
+  const { currentCompany } = useAuthContext();
 
   const [filterData, setFilterData] = useState<TEntrySearchParams>({
     search: '',
     start: startDateTime.getDate(),
     end: endDateTime.getDate(),
   });
-  const [accounts, setAccounts] = useState<TAccount[]>([]);
   const [entries, setEntries] = useState<TEntry[]>([]);
 
   const [editEntry, setEditEntry] = useState<TEntry>();
@@ -50,26 +44,19 @@ export function useEntries(): IUseEntries {
   const [entriesLastId, setEntriesLastId] = useState<string>();
   const lastEntryRef = useRef<HTMLDivElement>(null);
 
-  // Load Accounts and Entries
+  // Load Entries
   useEffect(() => {
     if (!currentCompany) return;
-    const accountApi = new AccountApi();
     const entryApi = new EntryApi();
-    loader(async () => {
-      const [accountReponse, entryResponse] = await Promise.all([
-        accountApi.list(currentCompany.id),
-        entryApi.list(currentCompany.id, filterData),
-      ]);
-      if (accountReponse.ok) setAccounts(accountReponse.data.accounts);
-      if (entryResponse.ok) {
-        const entries = entryResponse.data.entries;
-        setEntries(entries);
-        if (entries.length > 0)
-          setEntriesLastId(entries[entries.length - 1].id);
-      }
-    });
+    (async () => {
+      const response = await entryApi.list(currentCompany.id, filterData);
+      if (!response.ok) return;
+      const entries = response.data.entries;
+      setEntries(entries);
+      if (entries.length > 0) setEntriesLastId(entries[entries.length - 1].id);
+    })();
+
     return () => {
-      accountApi.abort();
       entryApi.abort();
     };
   }, [currentCompany]);
@@ -176,7 +163,6 @@ export function useEntries(): IUseEntries {
 
   return {
     filterData,
-    accounts,
     entries,
     setEntries,
     handleFilterInputChange,

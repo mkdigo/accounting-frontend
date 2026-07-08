@@ -4,8 +4,6 @@ import {
   Notifications,
   type TAppNotification,
 } from '../components/Notifications';
-import { type TCompany } from '../api/company-api';
-import { Company } from '../utils/company';
 
 export type TErrors = Record<string, string[]>;
 type TErrorsAppendInput = {
@@ -36,10 +34,6 @@ type TAppContext = {
   handleOpenModal: (name: string) => void;
   handleCloseModal: () => void;
   handleNotify: (notification: TAppNotification) => void;
-  companies: TCompany[];
-  setCompanies: React.Dispatch<React.SetStateAction<TCompany[]>>;
-  currentCompany: TCompany | undefined;
-  changeCurrentCompany: (data: string | TCompany) => void;
 };
 
 export const AppContext = createContext<TAppContext>({} as TAppContext);
@@ -58,25 +52,6 @@ export function AppContextProvider({
   );
   const [currentModal, setCurrentModal] = useState<string | null>(null);
   const [notifications, setNotifications] = useState<TAppNotification[]>([]);
-  const [companies, setCompanies] = useState<TCompany[]>([]);
-  const [currentCompany, setCurrentCompany] = useState<TCompany>();
-
-  function changeCurrentCompany(data: string | TCompany) {
-    if (typeof data === 'object') {
-      setCurrentCompany(data);
-      Company.setCompanyId(data.id);
-      return;
-    }
-
-    const filter = companies.filter((company) => company.id === data);
-    if (filter.length === 0) {
-      setCurrentCompany(undefined);
-      Company.removeCompanyId();
-      return;
-    }
-    setCurrentCompany(filter[0]);
-    Company.setCompanyId(filter[0].id);
-  }
 
   function errorsAppend({ key, errors }: TErrorsAppendInput): void {
     setErrors((prev) => ({
@@ -139,10 +114,6 @@ export function AppContextProvider({
         handleOpenModal,
         handleCloseModal,
         handleNotify,
-        companies,
-        setCompanies,
-        currentCompany,
-        changeCurrentCompany,
       }}
     >
       {children}
