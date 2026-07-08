@@ -3,7 +3,7 @@ import { DateTime } from '@mkdigo/datetime';
 
 import { Form } from '../Form';
 import { Input } from '../Form/Input';
-import { Select } from '../Form/Select';
+import { SelectWithFilter } from '../Form/SelectWithFilter';
 import { TextArea } from '../Form/TextArea';
 
 import { useAppContext } from '../../hooks/useAppContext';
@@ -36,8 +36,8 @@ export function EntryForm({
   } = useAppContext();
   const [data, setData] = useState<TEntryData>({
     inclusion: today.getDate(),
-    debitId: 0,
-    creditId: 0,
+    debitId: '',
+    creditId: '',
     value: 0,
     note: '',
   });
@@ -59,7 +59,6 @@ export function EntryForm({
   function handleInputChange(
     event:
       | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
       | React.ChangeEvent<HTMLTextAreaElement>,
   ): void {
     let value: string | number = event.target.value;
@@ -72,6 +71,19 @@ export function EntryForm({
     setData((prev) => ({
       ...prev,
       [event.target.name]: value,
+    }));
+  }
+
+  function handleSelectChange({
+    name,
+    value,
+  }: {
+    value: string;
+    name: string;
+  }): void {
+    setData((prev) => ({
+      ...prev,
+      [name]: value,
     }));
   }
 
@@ -165,34 +177,28 @@ export function EntryForm({
         required
         innerRef={inputDateRef}
       />
-      <Select
+      <SelectWithFilter
         label='Débito'
         name='debitId'
-        value={data.debitId.toString()}
-        onChange={handleInputChange}
+        value={data.debitId}
+        options={debitAccounts.map((account) => ({
+          label: account.name,
+          value: account.id,
+        }))}
+        onChange={handleSelectChange}
         required
-      >
-        <option value=''></option>
-        {debitAccounts.map((account) => (
-          <option value={account.id} key={account.id}>
-            {account.name}
-          </option>
-        ))}
-      </Select>
-      <Select
+      />
+      <SelectWithFilter
         label='Crédito'
         name='creditId'
-        value={data.creditId.toString()}
-        onChange={handleInputChange}
+        value={data.creditId}
+        options={creditAccounts.map((account) => ({
+          label: account.name,
+          value: account.id,
+        }))}
+        onChange={handleSelectChange}
         required
-      >
-        <option value=''></option>
-        {creditAccounts.map((account) => (
-          <option value={account.id} key={account.id}>
-            {account.name}
-          </option>
-        ))}
-      </Select>
+      />
       <Input
         label='Valor'
         name='value'

@@ -229,33 +229,6 @@ export function Accounts() {
               </Card.Buttons>
             </Card.Root>
           ))}
-        {/* <Table.Root
-          head={['Nome', 'Grupo', 'Subgrupo', 'Tags']}
-          textAlign={['left', 'left', 'left']}
-        >
-          {accounts
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .map((account) => (
-              <Table.Row
-                key={account.id}
-                onClick={() => handleAccountUpdateOpenModal(account)}
-              >
-                <Table.Column textAlign='left'>{account.name}</Table.Column>
-                <Table.Column textAlign='left'>
-                  {AccountTranslations.group(account.group)[lang]}
-                </Table.Column>
-                <Table.Column textAlign='left'>
-                  {AccountTranslations.subgroup(account.subgroup)[lang]}
-                </Table.Column>
-                <Table.Column textAlign='left'>
-                  {account.tags
-                    .map((tag) => TagTranslations.name(tag)[lang])
-                    .sort()
-                    .join(', ')}
-                </Table.Column>
-              </Table.Row>
-            ))}
-        </Table.Root> */}
       </Layout.Root>
       <Modal name='account-create' title='Criar uma conta'>
         <AccountForm setAccounts={setAccounts} />
@@ -281,7 +254,7 @@ export function Accounts() {
           <Select
             label='Tag'
             name='tag'
-            value={selectedTag.tag ?? undefined}
+            value={selectedTag.tag ?? ''}
             onChange={(event) =>
               setSelectedTag((prev) => ({
                 ...prev,

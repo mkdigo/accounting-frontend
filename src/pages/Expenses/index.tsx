@@ -43,9 +43,9 @@ export function Expenses() {
   });
   const [editEntry, setEditEntry] = useState<TEntry>({
     id: '',
-    credit_id: 0,
+    credit_id: '',
     credit_name: '',
-    debit_id: 0,
+    debit_id: '',
     debit_name: '',
     inclusion: '',
     note: '',

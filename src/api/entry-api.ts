@@ -6,8 +6,8 @@ import type { TAccountSubgroup } from './account-api';
 export type TEntryData = {
   id?: string;
   inclusion: string;
-  debitId: number;
-  creditId: number;
+  debitId: string;
+  creditId: string;
   value: number;
   note: string;
 };
@@ -15,9 +15,9 @@ export type TEntryData = {
 export type TEntry = {
   id: string;
   inclusion: string;
-  debit_id: number;
+  debit_id: string;
   debit_name: string;
-  credit_id: number;
+  credit_id: string;
   credit_name: string;
   value: number;
   note: string;
