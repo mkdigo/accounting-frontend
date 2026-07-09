@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, type ChangeEvent, useMemo } from 'react';
-import { Input } from '../Input';
+
+import { Wrapper } from '../Wrapper';
 
 import styles from './styles.module.css';
 
@@ -17,7 +18,7 @@ type TProps = {
   options: TOption[];
   label: string;
   name: string;
-  value: string;
+  value?: string;
   onChange?: (props: TOnChangeProps) => void;
   required?: boolean;
 };
@@ -34,7 +35,7 @@ export function SelectWithFilter({
   const [filter, setFilter] = useState<string>('');
   const [selectedOption, setSelectedOption] = useState<TOption>();
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLLabelElement>(null);
   const dropdownRef = useRef<HTMLUListElement>(null);
 
   const filteredOptions: TOption[] = useMemo(() => {
@@ -49,7 +50,7 @@ export function SelectWithFilter({
       if (selectedOption) return option;
       return regex.test(option.label);
     });
-  }, [filter]);
+  }, [filter, options]);
 
   useEffect(() => {
     const foundOption = options.filter((item) => item.value === value)[0];
@@ -99,14 +100,20 @@ export function SelectWithFilter({
   }
 
   return (
-    <div ref={containerRef} className={styles.container} onBlur={handleBlur}>
-      <Input
-        label={label}
+    <Wrapper
+      ref={containerRef}
+      name={name}
+      label={label}
+      className={styles.container}
+      onBlur={handleBlur}
+    >
+      <input
         name={name}
         value={filter}
         onChange={handleInputChange}
         onFocus={handleFocus}
         required={required}
+        placeholder=' '
       />
       <div className={styles.arrow} onClick={toggleDropdown}>
         {isOpen ? '▲' : '▼'}
@@ -132,6 +139,6 @@ export function SelectWithFilter({
           ))}
         </ul>
       )}
-    </div>
+    </Wrapper>
   );
 }

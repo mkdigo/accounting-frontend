@@ -10,6 +10,7 @@
     right: 0.5rem;
     top: 0.75rem;
     line-height: 1rem;
+    color: #000;
     cursor: pointer;
     user-select: none;
   }
@@ -26,6 +27,7 @@
     overflow: hidden;
     overflow-y: auto;
 
+    color: #000;
     background: #fff;
     border: var(--border);
     border-radius: var(--rounded);

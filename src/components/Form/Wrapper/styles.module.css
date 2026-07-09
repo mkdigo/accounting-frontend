@@ -16,6 +16,7 @@
     top: 0.5rem;
     left: 0;
 
+    color: #000;
     opacity: 0.6;
     transition: 0.5s;
     cursor: text;
@@ -104,7 +105,7 @@
     background: transparent;
     padding: 0.5rem;
     border: none;
-    flex-grow: 1;
+    width: 100%;
   }
 
   textarea {

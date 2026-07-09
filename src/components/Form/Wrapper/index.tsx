@@ -6,6 +6,7 @@ type TWrapper = {
   label: string;
   name: string;
   required?: boolean;
+  ref?: React.ForwardedRef<HTMLLabelElement | null>;
 };
 type Props = React.LabelHTMLAttributes<HTMLLabelElement> & TWrapper;
 
@@ -15,6 +16,7 @@ export function Wrapper({
   label,
   children,
   className,
+  ref,
   ...props
 }: Props) {
   const { errors } = useAppContext();
@@ -25,6 +27,7 @@ export function Wrapper({
   return (
     <label
       {...props}
+      ref={ref}
       className={[
         styles.label,
         required ? styles.required : '',
