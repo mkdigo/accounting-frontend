@@ -54,7 +54,11 @@ export function SelectWithFilter({
 
   useEffect(() => {
     const foundOption = options.filter((item) => item.value === value)[0];
-    if (!foundOption) return;
+    if (!foundOption) {
+      setFilter('');
+      setSelectedOption(undefined);
+      return;
+    }
     setFilter(foundOption.label);
     setSelectedOption(foundOption);
   }, [value]);

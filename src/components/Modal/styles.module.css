@@ -13,6 +13,7 @@
   z-index: 3;
 
   & > div {
+    position: relative;
     background: var(--color-offwhite);
     border-radius: 5px;
     width: 100%;

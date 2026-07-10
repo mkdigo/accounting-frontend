@@ -1,3 +1,4 @@
+import { DateTime } from '@mkdigo/datetime';
 import { Api } from './base/api';
 import type { TResponse } from './base/request-interface';
 
@@ -84,6 +85,10 @@ export type TAccount = {
 
 export type TAccountCreateData = Omit<TAccount, 'id'>;
 export type TAccountUpdateData = Omit<TAccount, 'id' | 'company_id' | 'tags'>;
+export type TAccountGetBalanceParams = {
+  accountId: string;
+  end: string;
+};
 
 export class AccountApi extends Api {
   async list(companyId: string): TResponse<{ accounts: TAccount[] }> {
@@ -117,5 +122,14 @@ export class AccountApi extends Api {
     data: { tagName: string },
   ): TResponse<{ account: TAccount }> {
     return this.request.patch(`/accounts/${id}/tags/remove`, data);
+  }
+
+  async getBalance(
+    params: TAccountGetBalanceParams,
+  ): TResponse<{ value: number }> {
+    return this.request.get(`/accounts/${params.accountId}/balance`, {
+      ...params,
+      end: DateTime.localeDateToUTC(params.end),
+    });
   }
 }

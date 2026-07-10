@@ -24,6 +24,7 @@ export type TEntry = {
 };
 
 export type TEntrySearchParams = {
+  accountId?: string;
   start: string;
   end: string;
   search: string;

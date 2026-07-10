@@ -1,0 +1,32 @@
+.table {
+  th,
+  td {
+    &:first-child {
+      width: 120px;
+    }
+
+    &:last-child,
+    &:nth-last-child(2) {
+      width: 160px;
+    }
+
+    &:nth-child(2) {
+      text-align: left !important;
+    }
+  }
+
+  @media (max-width: 700px) {
+    th,
+    td {
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+}
+
+.trashButton {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+}

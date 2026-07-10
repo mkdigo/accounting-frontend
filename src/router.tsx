@@ -18,6 +18,7 @@ import { Companies } from './pages/Companies/index.tsx';
 import { Accounts } from './pages/Accounts/index.tsx';
 import { Entries } from './pages/Entries/index.tsx';
 import { Expenses } from './pages/Expenses/index.tsx';
+import { Banks } from './pages/Banks/index.tsx';
 
 export const router = createBrowserRouter(
   [
@@ -51,6 +52,10 @@ export const router = createBrowserRouter(
         {
           path: '/balance',
           Component: BalanceSheet,
+        },
+        {
+          path: '/banks',
+          Component: Banks,
         },
         {
           path: '/entries',

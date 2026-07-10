@@ -105,8 +105,8 @@ export function EntryForm({
 
       setData((prev) => ({
         ...prev,
-        debit_id: 0,
-        credit_id: 0,
+        debitId: '',
+        creditId: '',
         value: 0,
         note: '',
       }));

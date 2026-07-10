@@ -44,6 +44,10 @@
         display: flex;
         justify-content: flex-end;
         gap: 0.5rem;
+
+        label {
+          max-width: 300px;
+        }
       }
 
       @media print {

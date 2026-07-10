@@ -53,6 +53,7 @@ function Root({ head, rows, textAlign, children, ...props }: RootProps) {
 
 type RowProps = React.HTMLAttributes<HTMLTableRowElement> & {
   columns?: Array<string | number | null | undefined>;
+  ref?: React.Ref<HTMLTableRowElement>;
 };
 
 function Row({ columns, children, ...props }: RowProps) {
